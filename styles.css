@@ -1,0 +1,530 @@
+/* =========================================
+   1. VARIABLES Y RESET (Base del diseño)
+   ========================================= */
+:root {
+    --primary: #2563EB; /* Azul moderno (Tech) */
+    --dark: #0F172A;    /* Azul noche muy oscuro */
+    --light: #F8FAFC;   /* Gris casi blanco */
+    --accent: #F59E0B;  /* Dorado/Naranja para resaltar Premium */
+    --text-gray: #CBD5E1; /* Texto gris claro para fondo oscuro */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; /* Fuente moderna */
+}
+
+body {
+    background-color: var(--light);
+    color: var(--dark);
+    overflow-x: hidden; /* Evita scroll lateral */
+}
+
+html {
+    scroll-behavior: smooth; /* Desplazamiento suave al dar clic en enlaces */
+}
+
+
+/* =========================================
+   2. BARRA DE NAVEGACIÓN (NAV)
+   ========================================= */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    position: sticky; /* Se queda pegada arriba al bajar */
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    letter-spacing: -1px;
+}
+
+.btn-nav {
+    text-decoration: none;
+    color: var(--dark);
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+.btn-nav:hover {
+    background-color: var(--light);
+    color: var(--primary);
+}
+
+
+/* =========================================
+   3. HERO (PORTADA CON VIDEO DE FONDO)
+   ========================================= */
+.hero {
+    position: relative; /* Necesario para contener el video absoluto */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+    min-height: 90vh; /* Ocupa casi toda la pantalla */
+    overflow: hidden;
+    color: white;
+}
+
+/* El Video de Fondo */
+.video-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -2; /* Al fondo absoluto */
+    transform: translateX(-50%) translateY(-50%); /* Centrado perfecto */
+    object-fit: cover; /* Cubre todo sin deformarse */
+}
+
+/* La Capa Oscura (Overlay) */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.85); /* Azul muy oscuro al 85% de opacidad */
+    z-index: -1;
+}
+
+/* El Texto Principal */
+.hero-text {
+    z-index: 1;
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: 3.5rem; /* Grande en PC */
+    line-height: 1.1;
+    margin-bottom: 20px;
+    font-weight: 800;
+}
+
+.hero h1 span {
+    color: var(--primary); /* Resalta la palabra "Experiencia" */
+    background: white;
+    padding: 0 10px;
+    border-radius: 5px;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    color: var(--text-gray);
+    margin-bottom: 40px;
+}
+
+
+/* =========================================
+   4. BOTONES DEL HERO (Grupo de 3)
+   ========================================= */
+.hero-btns {
+    display: flex;
+    flex-direction: column; /* En celular: uno abajo de otro */
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.demo-btns-group {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap; /* Si no caben, bajan */
+}
+
+/* Estilos de Botones */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+    transition: transform 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    background: #1d4ed8;
+}
+
+.btn-secondary {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    transition: all 0.3s;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: var(--dark);
+    border-color: white;
+}
+
+/* Botón Premium con Brillo Dorado */
+.btn-glow-border {
+    border-color: var(--accent);
+    color: var(--accent);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.2);
+}
+
+.btn-glow-border:hover {
+    background: var(--accent);
+    color: white;
+    box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+}
+
+
+/* =========================================
+   5. CARACTERÍSTICAS (Iconos)
+   ========================================= */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 80px 5%;
+    flex-wrap: wrap;
+    background: white;
+    position: relative;
+    z-index: 2;
+    margin-top: -50px; /* Efecto visual: sube sobre el video */
+}
+
+.feature-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); /* Sombra suave */
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-card i {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 20px;
+    background: #EFF6FF; /* Fondo azulito palido */
+    padding: 20px;
+    border-radius: 50%;
+}
+
+.feature-card h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+
+.feature-card p {
+    color: #64748B;
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   6. TABLA DE PRECIOS
+   ========================================= */
+.pricing {
+    padding: 100px 5%;
+    background: var(--light);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 60px;
+    color: var(--dark);
+}
+
+.pricing-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.price-card {
+    background: white;
+    border-radius: 20px;
+    padding: 40px;
+    width: 380px;
+    border: 1px solid #E2E8F0;
+    position: relative;
+}
+
+/* Estilo especial para la tarjeta PREMIUM */
+.price-card.premium {
+    border: 2px solid var(--primary);
+    box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+    transform: scale(1.05); /* Un poco más grande */
+    z-index: 2;
+}
+
+.badge {
+    position: absolute;
+    top: -15px;
+    right: 20px;
+    background: var(--accent);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+}
+
+.price {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin: 20px 0;
+}
+
+.price span {
+    font-size: 1rem;
+    color: #94A3B8;
+    font-weight: normal;
+}
+
+.price-card ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.price-card li {
+    margin-bottom: 15px;
+    color: #334155;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.price-card li i {
+    color: var(--primary); /* Palomita azul */
+}
+
+/* Elementos desactivados (taches) */
+.disabled {
+    color: #CBD5E1 !important;
+    text-decoration: line-through;
+}
+
+.disabled i {
+    color: #CBD5E1 !important;
+}
+
+.btn-plan {
+    display: block;
+    text-align: center;
+    background: var(--dark);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-plan:hover {
+    background: #334155;
+}
+
+.btn-glow {
+    background: var(--primary);
+}
+
+.btn-glow:hover {
+    background: #1d4ed8;
+    box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+}
+
+
+/* =========================================
+   7. SECCIÓN ADICIONAL (ADD-ON QR)
+   ========================================= */
+.addon-section {
+    padding: 80px 5%;
+    background: white;
+    margin-top: 50px;
+    border-top: 1px solid #E2E8F0;
+}
+
+.addon-content {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.addon-text { flex: 1; }
+.addon-img { flex: 1; }
+
+.addon-img img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+}
+
+.tag {
+    background: var(--dark);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.addon-text h2 {
+    font-size: 2.2rem;
+    margin: 20px 0;
+}
+
+.addon-text ul {
+    list-style: none;
+    margin: 25px 0;
+}
+
+.addon-text li {
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+
+/* =========================================
+   8. FOOTER
+   ========================================= */
+footer {
+    text-align: center;
+    padding: 100px 20px;
+    background: var(--dark);
+    color: white;
+}
+
+.btn-whatsapp {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: white;
+    padding: 18px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-top: 30px;
+    box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+    transition: transform 0.3s;
+}
+
+.btn-whatsapp:hover {
+    transform: scale(1.05);
+}
+
+.copyright {
+    margin-top: 60px;
+    color: #64748B;
+    font-size: 0.9rem;
+}
+
+
+/* =========================================
+   9. RESPONSIVE (CELULAR)
+   ========================================= */
+@media (min-width: 768px) {
+    /* Ajuste para PC: Botones en línea horizontal */
+    .hero-btns {
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajustes para Móvil */
+    
+    .hero h1 { font-size: 2.5rem; } /* Título más pequeño */
+    
+    .hero { min-height: 80vh; }
+
+    .price-card.premium { 
+        transform: scale(1); /* Quita el zoom en celular */
+        margin-top: 20px; 
+    }
+    
+    .addon-content { 
+        flex-direction: column; /* Apilar imagen y texto */
+    }
+    
+    .features {
+        margin-top: 0; /* Quita el efecto de superposición en móvil */
+        background: var(--light);
+    }
+    
+    /* Botones más anchos para tocar fácil */
+    .btn-secondary, .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* =========================================
+   AJUSTES PARA MÚLTIPLES SERVICIOS (ZIG-ZAG)
+   ========================================= */
+
+/* Fondo blanco para alternar (Gris -> Blanco -> Footer Negro) */
+.white-bg {
+    background-color: white !important;
+    border-top: 1px solid #E2E8F0;
+}
+
+/* Clase para invertir el orden (Foto Izq - Texto Der) */
+.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Ajuste importante para móvil */
+@media (max-width: 768px) {
+    /* En celular queremos que SIEMPRE sea: Imagen arriba, Texto abajo */
+    /* No importa si es reverse o normal */
+    .addon-content, .reverse {
+        flex-direction: column-reverse; /* Foto arriba, texto abajo */
+        gap: 30px;
+    }
+    
+    /* Pequeño ajuste para que la foto no quede pegada al texto */
+    .addon-img {
+        margin-bottom: 20px;
+    }
+}
